@@ -10,6 +10,7 @@ require("DropboxUploader.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Cloud uploader</title>
+<link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,200,300,500,600,700,800,900&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
