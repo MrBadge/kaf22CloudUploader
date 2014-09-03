@@ -59,69 +59,35 @@ if ($_POST) {
 }
 ?>
 
-<h1 align="center" class="heading-txt">Cloud uploader for kaf22 students</h1>
-<table width="812" border="0" align="center" style="margin-top:-50px;" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="50">&nbsp;</td>
-  </tr>
-</table>
-<table width="812" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="left" valign="top" class="blue-box"><table width="415" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr>
-        <td height="84">&nbsp;</td>
-      </tr>
-      <tr>
-        <td><table width="415" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="115" align="left" valign="top">
-              <img src="images/box-img.png" width="90" height="87" alt="" />
-            </td>
-            <td>
-              <strong>Destination:</strong> 
-                <select name="folder">
-                  <?php
-                    $i = 0;
-                    foreach($data["directories"] AS $output => $dirname){
-                      echo '<option value="'.$i.'">'.$dirname.' (/'.$output.')</option>';
-                      $i++;
-                    }
-                  ?>
-                </select>
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        
-      </tr>
-      <tr>
-        <td>
-          <table width="415" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td align="center"><form method="POST" enctype="multipart/form-data">
-  		          <input type="file" name="file" /> 
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td align="center">
-          <input name="Button" type="submit" value="" width="69" height="35" border="none" style="background-image:url(images/upload-btn.png)" class="upload" />  
-        </td>
-      </tr>
-      <tr>
-	<td align="center"><a target="_blank" style="color: #FF9900" href="https://www.dropbox.com/sh/lpxfgwzgebh1snx/AADRxppntPhhekrfKe94zo-ha?dl=0">Observe the cloud</a></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+
+
+
+<div class="header">
+  <h1>Cloud uploader for kaf22 students</h1>
+</div>
+
+<div class="container">
+  <form method="POST" enctype="multipart/form-data">
+
+    <input type="file" name="file" /> 
+
+    <div class="block">
+      <img class="logo">
+      <select class="select">
+        <?php
+          $i = 0;
+          foreach($data["directories"] AS $output => $dirname){
+            echo '<option value="'.$i.'">'.$dirname.' (/'.$output.')</option>';
+            $i++;
+          }
+        ?>
+      </select>
+    </div>
+    <div class="block dropzone"></div>
+    <a class="upload-button">Загрузить</a>
+  </form>
+</div>
+<a target="_blank" class="observe" href="https://www.dropbox.com/sh/lpxfgwzgebh1snx/AADRxppntPhhekrfKe94zo-ha?dl=0">Observe the cloud</a>
+
 </body>
 </html>
