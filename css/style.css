@@ -1,0 +1,38 @@
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	background-color:#1a1c1e;
+	}
+image { border:0;}
+	
+.blue-box {
+	background:url(../images/blue-box.png) no-repeat;
+	width:812px;
+	height:384px;
+	}
+	
+.heading-txt {
+	font-family:Tahoma;
+	font-weight:normal;
+	color:#FFFFFF;
+	font-size:36px;
+	}
+	
+.heading-txt-bld {
+	font-family:Tahoma;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:36px;
+	}
+.txt-field {
+	border:1px solid #003661;
+	width:218px;
+	height:26px;
+	}
+.upload {
+	
+	width:178px; height:49px;
+	border:none;
+	}
