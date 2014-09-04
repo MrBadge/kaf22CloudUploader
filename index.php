@@ -11,7 +11,7 @@ require("DropboxUploader.php");
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Cloud uploader</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
