@@ -10,7 +10,14 @@ require("DropboxUploader.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Cloud uploader</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/fileinput.min.js" type="text/javascript"></script>
+<script src="js/utils.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,35 +27,37 @@ require("DropboxUploader.php");
 
 if ($_POST) {
     #require 'DropboxUploader.php';
-
+    $file = $_FILES['fl'];
     $keys = array_keys($data["directories"]);
+    $directory = $keys[$_POST["fld"]];
 
-    $directory = $keys[$_POST["folder"]];
-
-    //echo "<h4 style=\"color: yellow;\">" . htmlspecialchars($directory) . "</h4>";
+    //echo "<script type='text/javascript'>alert(tag:" . $directory . ");</script>";
 
     try {
-        if ($_FILES['file']['error'] !== UPLOAD_ERR_OK)
+        if ($file['error'] !== UPLOAD_ERR_OK)
             throw new Exception('File was not successfully uploaded from your computer.');
 
         $tmpDir = uniqid('/tmp/DropboxUploader-');
         if (!mkdir($tmpDir))
             throw new Exception('Cannot create temporary directory!');
 
-        if ($_FILES['file']['name'] === "")
+        if ($file['name'] === "")
             throw new Exception('File name not supplied by the browser.');
 
-        $tmpFile = $tmpDir.'/'.str_replace("/\0", '_', $_FILES['file']['name']);
-        if (!move_uploaded_file($_FILES['file']['tmp_name'], $tmpFile))
+        $tmpFile = $tmpDir.'/'.str_replace("/\0", '_', $file['name']);
+        if (!move_uploaded_file($file['tmp_name'], $tmpFile))
             throw new Exception('Cannot rename uploaded file!');
 
     		$uploader = new DropboxUploader($DropBoxMail, $DropBoxPassw);
-        $uploader->upload($tmpFile, "kaf22Cloud");
+        $uploader->upload($tmpFile, $directory);
 
-        echo '<h3 align="center" style="color: green;font-weight:bold;">File successfully uploaded to the cloud!</h3>';
+        //echo '<h3 align="center" style="color: green;font-weight:bold;">File successfully uploaded to the cloud!</h3>';
+        echo '<div class="alert alert-success" width="940" align="center" role="alert">File successfully uploaded to the cloud!</div>';
     } catch(Exception $e) {
-        echo '<h3 align="center" style="color: red;font-weight:bold;">Error: ' . htmlspecialchars($e->getMessage()) . '</h3>';
+        //echo '<h3 align="center" style="color: red;font-weight:bold;">Error: ' . htmlspecialchars($e->getMessage()) . '</h3>';
+        echo '<div class="alert alert-danger" width="940" align="center" role="alert"><strong>Error: </strong>' . htmlspecialchars($e->getMessage()) . ' </div>';
     }
+    //echo '<script type="text/javascript">createAutoClosingAlert(".alert", 2000);</script>';
 
     // Clean up
     if (isset($tmpFile) && file_exists($tmpFile))
@@ -59,69 +68,32 @@ if ($_POST) {
 }
 ?>
 
-<h1 align="center" class="heading-txt">Cloud uploader for kaf22 students</h1>
-<table width="812" border="0" align="center" style="margin-top:-50px;" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="50">&nbsp;</td>
-  </tr>
-</table>
-<table width="812" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="left" valign="top" class="blue-box"><table width="415" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr>
-        <td height="84">&nbsp;</td>
-      </tr>
-      <tr>
-        <td><table width="415" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="115" align="left" valign="top">
-              <img src="images/box-img.png" width="90" height="87" alt="" />
-            </td>
-            <td>
-              <strong>Destination:</strong> 
-                <select name="folder">
-                  <?php
-                    $i = 0;
-                    foreach($data["directories"] AS $output => $dirname){
-                      echo '<option value="'.$i.'">'.$dirname.' (/'.$output.')</option>';
-                      $i++;
-                    }
-                  ?>
-                </select>
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        
-      </tr>
-      <tr>
-        <td>
-          <table width="415" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td align="center"><form method="POST" enctype="multipart/form-data">
-  		          <input type="file" name="file" /> 
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td align="center">
-          <input name="Button" type="submit" value="" width="69" height="35" border="none" style="background-image:url(images/upload-btn.png)" class="upload" />  
-        </td>
-      </tr>
-      <tr>
-	<td align="center"><a target="_blank" style="color: #FF9900" href="https://www.dropbox.com/sh/lpxfgwzgebh1snx/AADRxppntPhhekrfKe94zo-ha?dl=0">Observe the cloud</a></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+<div class="container">
+<div class="hero-unit">
+  <img src="images/box-img.png" style="float: left; margin-top: 25px; margin-left: -20px" hspace="20" width="90" height="87" alt="" />
+  <h1>Cloud uploader for kaf22 students</h1>
+    <hr>
+    <p>Destination: 
+    <form method="POST" enctype="multipart/form-data">
+    <select name="fld">
+      <?php
+        $i = 0;
+        foreach($data["directories"] AS $output => $dirname){
+          echo '<option value="'.$i.'">'.$dirname.' (/'.$output.')</option>';
+          $i++;
+        }
+      ?>
+    </select>
+    </p>
+    <script>$("#input-id").fileinput({'showUpload':false, 'showPreview':false});</script>
+    <form method="POST" enctype="multipart/form-data">
+    <input id="input-id" type="file" class="file" name="fl" value="">
+    <hr>
+  <p>
+    <a href="https://www.dropbox.com/sh/lpxfgwzgebh1snx/AADRxppntPhhekrfKe94zo-ha?dl=0" target="_blank" class="btn btn-primary btn-large">Observe the cloud</a>
+  </p>
+</div>
+</div>
+
 </body>
 </html>
