@@ -85,7 +85,7 @@ if ($_POST) {
       </select>
     </div>
     <div class="block dropzone"></div>
-    <a class="upload-button">Загрузить</a>
+    <a class="upload-button">Upload</a>
   </form>
 </div>
 <a target="_blank" class="observe" href="https://www.dropbox.com/sh/lpxfgwzgebh1snx/AADRxppntPhhekrfKe94zo-ha?dl=0">Observe the cloud</a>
