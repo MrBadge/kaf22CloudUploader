@@ -7,30 +7,7 @@ body {
 	}
 image { border:0;}
 	
-.blue-box {
-	background:url(../images/blue-box.png) no-repeat;
-	width:812px;
-	height:384px;
-	}
-	
-.heading-txt {
-	font-family:Tahoma;
-	font-weight:normal;
-	color:#FFFFFF;
-	font-size:36px;
-	}
-	
-.heading-txt-bld {
-	font-family:Tahoma;
-	font-weight:bold;
-	color:#FFFFFF;
-	font-size:36px;
-	}
-.txt-field {
-	border:1px solid #003661;
-	width:218px;
-	height:26px;
-	}
+
 .upload {
 	
 	width:178px; height:49px;
@@ -38,14 +15,11 @@ image { border:0;}
 	}
 
 .container {
-  width: 800px;
-  margin-top:0; 
-  margin-right:auto; 
-  margin-bottom:0; 
-  margin-left:auto;
+  
 }
 
 .hero-unit {
+  width: 800px;
   padding: 50px;
   margin-bottom: 30px;
   font-size: 18px;
@@ -56,6 +30,10 @@ image { border:0;}
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hero-unit h1 {
@@ -64,8 +42,4 @@ image { border:0;}
   line-height: 1;
   letter-spacing: -1px;
   color: inherit;
-}
-
-.hero-unit li {
-  line-height: 30px;
 }
